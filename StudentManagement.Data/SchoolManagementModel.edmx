@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SchoolManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClassMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StudentMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TeacherAllocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassMasterID" Type="int" Nullable="false" />
+          <Property Name="TeacherMasterID" Type="int" Nullable="false" />
+          <Property Name="StudentMasterID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeacherMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_TeacherAllocation_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="TeacherAllocation" Type="Self.TeacherAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeacherAllocation">
+              <PropertyRef Name="ClassMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherAllocation_StudentMaster">
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="1" />
+          <End Role="TeacherAllocation" Type="Self.TeacherAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeacherAllocation">
+              <PropertyRef Name="StudentMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherAllocation_TeacherMaster">
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="1" />
+          <End Role="TeacherAllocation" Type="Self.TeacherAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeacherAllocation">
+              <PropertyRef Name="TeacherMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolManagementModelStoreContainer">
+          <EntitySet Name="ClassMaster" EntityType="Self.ClassMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentMaster" EntityType="Self.StudentMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherAllocation" EntityType="Self.TeacherAllocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherMaster" EntityType="Self.TeacherMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TeacherAllocation_ClassMaster" Association="Self.FK_TeacherAllocation_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMaster" />
+            <End Role="TeacherAllocation" EntitySet="TeacherAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherAllocation_StudentMaster" Association="Self.FK_TeacherAllocation_StudentMaster">
+            <End Role="StudentMaster" EntitySet="StudentMaster" />
+            <End Role="TeacherAllocation" EntitySet="TeacherAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherAllocation_TeacherMaster" Association="Self.FK_TeacherAllocation_TeacherMaster">
+            <End Role="TeacherMaster" EntitySet="TeacherMaster" />
+            <End Role="TeacherAllocation" EntitySet="TeacherAllocation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClassMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TeacherAllocations" Relationship="Self.FK_TeacherAllocation_ClassMaster" FromRole="ClassMaster" ToRole="TeacherAllocation" />
+        </EntityType>
+        <EntityType Name="StudentMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TeacherAllocations" Relationship="Self.FK_TeacherAllocation_StudentMaster" FromRole="StudentMaster" ToRole="TeacherAllocation" />
+        </EntityType>
+        <EntityType Name="TeacherAllocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassMasterID" Type="Int32" Nullable="false" />
+          <Property Name="TeacherMasterID" Type="Int32" Nullable="false" />
+          <Property Name="StudentMasterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClassMaster" Relationship="Self.FK_TeacherAllocation_ClassMaster" FromRole="TeacherAllocation" ToRole="ClassMaster" />
+          <NavigationProperty Name="StudentMaster" Relationship="Self.FK_TeacherAllocation_StudentMaster" FromRole="TeacherAllocation" ToRole="StudentMaster" />
+          <NavigationProperty Name="TeacherMaster" Relationship="Self.FK_TeacherAllocation_TeacherMaster" FromRole="TeacherAllocation" ToRole="TeacherMaster" />
+        </EntityType>
+        <EntityType Name="TeacherMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TeacherAllocations" Relationship="Self.FK_TeacherAllocation_TeacherMaster" FromRole="TeacherMaster" ToRole="TeacherAllocation" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_TeacherAllocation_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="TeacherAllocation" Type="Self.TeacherAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeacherAllocation">
+              <PropertyRef Name="ClassMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherAllocation_StudentMaster">
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="1" />
+          <End Role="TeacherAllocation" Type="Self.TeacherAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeacherAllocation">
+              <PropertyRef Name="StudentMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherAllocation_TeacherMaster">
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="1" />
+          <End Role="TeacherAllocation" Type="Self.TeacherAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TeacherAllocation">
+              <PropertyRef Name="TeacherMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClassMasters" EntityType="Self.ClassMaster" />
+          <EntitySet Name="StudentMasters" EntityType="Self.StudentMaster" />
+          <EntitySet Name="TeacherAllocations" EntityType="Self.TeacherAllocation" />
+          <EntitySet Name="TeacherMasters" EntityType="Self.TeacherMaster" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_TeacherAllocation_ClassMaster" Association="Self.FK_TeacherAllocation_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMasters" />
+            <End Role="TeacherAllocation" EntitySet="TeacherAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherAllocation_StudentMaster" Association="Self.FK_TeacherAllocation_StudentMaster">
+            <End Role="StudentMaster" EntitySet="StudentMasters" />
+            <End Role="TeacherAllocation" EntitySet="TeacherAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherAllocation_TeacherMaster" Association="Self.FK_TeacherAllocation_TeacherMaster">
+            <End Role="TeacherMaster" EntitySet="TeacherMasters" />
+            <End Role="TeacherAllocation" EntitySet="TeacherAllocations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolManagementModelStoreContainer" CdmEntityContainer="SchoolManagementEntities">
+          <EntitySetMapping Name="ClassMasters">
+            <EntityTypeMapping TypeName="SchoolManagementModel.ClassMaster">
+              <MappingFragment StoreEntitySet="ClassMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentMasters">
+            <EntityTypeMapping TypeName="SchoolManagementModel.StudentMaster">
+              <MappingFragment StoreEntitySet="StudentMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherAllocations">
+            <EntityTypeMapping TypeName="SchoolManagementModel.TeacherAllocation">
+              <MappingFragment StoreEntitySet="TeacherAllocation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassMasterID" ColumnName="ClassMasterID" />
+                <ScalarProperty Name="TeacherMasterID" ColumnName="TeacherMasterID" />
+                <ScalarProperty Name="StudentMasterID" ColumnName="StudentMasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherMasters">
+            <EntityTypeMapping TypeName="SchoolManagementModel.TeacherMaster">
+              <MappingFragment StoreEntitySet="TeacherMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SchoolManagementModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

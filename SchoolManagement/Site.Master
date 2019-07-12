@@ -1,0 +1,232 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SchoolManagement.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Management</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <%--<webopt:BundleReference runat="server" Path="~/Content/css" />--%>
+    <link href="theme/css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="theme/css/charisma-app.css" rel="stylesheet">
+    <link href='theme/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='theme/bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='theme/bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='theme/bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='theme/bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='theme/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='theme/css/jquery.noty.css' rel='stylesheet'>
+    <link href='theme/css/noty_theme_default.css' rel='stylesheet'>
+    <link href='theme/css/elfinder.min.css' rel='stylesheet'>
+    <link href='theme/css/elfinder.theme.css' rel='stylesheet'>
+    <link href='theme/css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='theme/css/uploadify.css' rel='stylesheet'>
+    <link href='theme/css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="theme/bower_components/jquery/jquery.min.js"></script>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="Content/jquery-ui.css" rel="stylesheet" />
+    <link href="Content/jquery-ui.theme.css" rel="stylesheet" />
+</head>
+<body>
+    <form runat="server">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="navbar-inner">
+                <button type="button" class="navbar-toggle pull-left animated flip">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" runat="server" href="~/">
+                    <img alt="Charisma Logo" src="theme/img/logo20.png" class="hidden-xs" />
+                    <span>School Management</span></a>
+
+                <!-- user dropdown starts -->
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <%--                        <asp:Label ID="Label1" runat="server" class="hidden-sm hidden-xs" Text="Label"></asp:Label>--%>
+                        <span class="hidden-sm hidden-xs">admin</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" runat="server" onserverclick="LogOut_ServerClick">Logout</a></li>
+                    </ul>
+                </div>
+                <!-- user dropdown ends -->
+            </div>
+        </div>
+        <div class="ch-container">
+            <div class="row">
+                <!-- left menu starts -->
+                <div class="col-sm-2 col-lg-2">
+                    <div class="sidebar-nav">
+                        <div class="nav-canvas">
+                            <div class="nav-sm nav nav-stacked">
+                            </div>
+                            <ul class="nav nav-pills nav-stacked main-menu">
+                                <li class="nav-header">Main</li>
+                                <li><a runat="server" class="ajax-link" href="~/"><i class="glyphicon glyphicon-home"></i><span>Dashboard</span></a>
+                                </li>
+                                <li><a runat="server" class="ajax-link" href="~/Student"><i class="glyphicon glyphicon-user"></i><span>Student</span></a>
+                                </li>
+                                <li><a runat="server" class="ajax-link" href="~/Class"><i class="glyphicon glyphicon-edit"></i><span>Classes</span></a></li>
+                                <li><a runat="server" class="ajax-link" href="~/Teacher"><i class="glyphicon glyphicon-user"></i><span>Teacher</span></a>
+                                </li>
+                                <li><a runat="server" class="ajax-link" href="~/TeacherAllocation"><i class="glyphicon glyphicon-th-list"></i><span>Teacher Allocation</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!-- left menu ends -->
+
+                <noscript>
+                    <div class="alert alert-block col-md-12">
+                        <h4 class="alert-heading">Warning!</h4>
+
+                        <p>
+                            You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+                            enabled to use this site.
+                        </p>
+                    </div>
+                </noscript>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+
+                <!--/#content.col-md-0-->
+            </div>
+            <!--/fluid-row-->
+
+            <!-- Ad, you can remove it -->
+            <%--<div class="row">
+                <div class="col-md-9 col-lg-9 col-xs-9 hidden-xs">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Charisma Demo 2 -->
+                    <ins class="adsbygoogle"
+                        style="display: inline-block; width: 728px; height: 90px"
+                        data-ad-client="ca-pub-5108790028230107"
+                        data-ad-slot="3193373905"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+                </div>
+                <div class="col-md-2 col-lg-3 col-sm-12 col-xs-12 email-subscription-footer">
+                    <div class="mc_embed_signup">
+                        <form action="//halalit.us3.list-manage.com/subscribe/post?u=444b176aa3c39f656c66381f6&amp;id=eeb0c04e84" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div>
+                                <label>Keep up with my work</label>
+                                <input type="email" value="" name="EMAIL" class="email" placeholder="Email address" required>
+
+                                <div class="power_field">
+                                    <input type="text" name="b_444b176aa3c39f656c66381f6_eeb0c04e84" tabindex="-1" value="">
+                                </div>
+                                <div class="clear">
+                                    <input type="submit" value="Subscribe" name="subscribe" class="button">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--End mc_embed_signup-->
+                </div>
+
+            </div>--%>
+
+
+
+
+            <footer class="row">
+                <p class="col-md-9 col-sm-9 col-xs-12 copyright">
+                    &copy; <a href="http://usman.it" target="_blank">Muhammad
+                Usman</a> 2012 - 2015
+                </p>
+
+                <p class="col-md-3 col-sm-3 col-xs-12 powered-by">
+                    Powered by: <a
+                        href="http://usman.it/free-responsive-admin-template">Charisma</a>
+                </p>
+            </footer>
+
+        </div>
+        <%-- <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="~/">School Management</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/Student">Student</a></li>
+                        <li><a runat="server" href="~/Teacher">Teacher</a></li>
+                        <li><a runat="server" href="~/Class">Class</a></li>
+                        <li><a runat="server" href="~/TeacherAllocation">Teacher Allocation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            </footer>
+        </div>--%>
+    </form>
+
+    <script src="theme/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- library for cookie management -->
+    <script src="theme/js/jquery.cookie.js"></script>
+    <!-- calender plugin -->
+    <script src='theme/bower_components/moment/min/moment.min.js'></script>
+    <script src='theme/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='theme/js/jquery.dataTables.min.js'></script>
+
+    <!-- select or dropdown enhancer -->
+    <script src="theme/bower_components/chosen/chosen.jquery.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="theme/bower_components/colorbox/jquery.colorbox-min.js"></script>
+    <!-- notification plugin -->
+    <script src="theme/js/jquery.noty.js"></script>
+    <!-- library for making tables responsive -->
+    <script src="theme/bower_components/responsive-tables/responsive-tables.js"></script>
+    <!-- tour plugin -->
+    <script src="theme/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="theme/js/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="theme/js/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="theme/js/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="theme/js/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="theme/js/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="theme/js/charisma.js"></script>
+    <script src="Scripts/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".dates").datepicker();
+        });
+    </script>
+</body>
+</html>
